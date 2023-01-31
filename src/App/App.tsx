@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { getQuote } from '../apiCalls';
 import { Quote } from '../interfaces';
+import { Box, Container } from '@mui/system';
 
 const App = () => {
   const [quote, setQuote] = useState<Quote>({
@@ -11,18 +12,16 @@ const App = () => {
 
   useEffect(() => {
     getQuote()
-      .then(data => {
-        console.log(data)
-        setQuote(data)
-      })
+      .then(data => setQuote(data))
   }, [])
 
   return (
     <main className="App">
-      <h1>
-        {quote.quote}
-      </h1>
-      <h2>by: {quote.author}</h2>
+      <Container maxWidth="sm">
+        <Box sx={{ bgcolor: '#cfe8fc', height: '50vh', 'textAlign':'center', marginTop: '20vh'}}>
+          {quote.quote} -{quote.author}
+        </Box>
+      </Container>
     </main>
   );
 }
